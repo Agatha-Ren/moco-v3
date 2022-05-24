@@ -186,7 +186,9 @@ def main_worker(gpu, ngpus_per_node, args):
 
             args.start_epoch = 0
             msg = model.load_state_dict(state_dict, strict=False)
+            print(set(msg.missing_keys))
             assert set(msg.missing_keys) == {"%s.weight" % linear_keyword, "%s.bias" % linear_keyword}
+
 
             print("=> loaded pre-trained model '{}'".format(args.pretrained))
         else:
